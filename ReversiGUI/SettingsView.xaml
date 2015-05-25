@@ -7,21 +7,32 @@
              d:DesignHeight="300" d:DesignWidth="300">
     
     <DockPanel>
-        <Button x:Name="isCapturedBool" DockPanel.Dock="Top" Margin="0,5" Height="50" Width="150">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ShowCapturedBy.Value}" Value="true">
-                            <Setter Property="Opacity" Value="1"/>
-                            <Setter Property="TextBlock.Text" Value="Show spoilers: ON"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding ShowCapturedBy.Value}" Value="false">
-                            <Setter Property="Opacity" Value="0.6"/>
-                            <Setter Property="TextBlock.Text" Value="Show spoilers: OFF"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
+        <Button x:Name="isCapturedBool" DockPanel.Dock="Top" Margin="0,5" Height="50" Width="150" Command="{Binding ChangeShowCaptured}">
+            <Button.Template>
+                <ControlTemplate>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="50">
+                        <TextBlock TextAlignment="Center" TextWrapping="Wrap" Padding="12">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ShowCapturedBy.Value}" Value="true">
+                                            <Setter Property="Background" Value="#8AD49D"/>
+                                            <Setter Property="TextBlock.Text" Value="Show spoilers: ON"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ShowCapturedBy.Value}" Value="false">
+                                            <Setter Property="Background" Value="#D48A8A"/>
+                                            <Setter Property="TextBlock.Text" Value="Show spoilers: OFF"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Border>
+                   
+                   
+                </ControlTemplate>
+                
+            </Button.Template>
         </Button>
     </DockPanel>   
 </UserControl>

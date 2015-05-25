@@ -10,24 +10,11 @@ namespace ReversiGUI
 {
     public class SettingsViewModel
     {
-        /*public static string WHITE = "white";
-        public static string BLACK = "black";
-        public static string GREEN = "green";
-        public static string RED = "red";
-        public static string YELLOW = "yellow";
-        public static string BLUE = "blue";
-
-        private readonly ICell<string> colorPlayer1 = Cell.Create<String>("white");
-        public ICell<String> ColorPlayer1 { get { return colorPlayer1; } }
-
-
-        private readonly ICell<string> colorPlayer2 = Cell.Create<String>("black");
-        public ICell<String> ColorPlayer2 { get { return colorPlayer2; } }*/
-
-        private readonly ICell<bool> showCapturedBy = Cell.Create<bool>(false);
+        private readonly ICell<bool> showCapturedBy = Cell.Create<bool>(true);
         public ICell<bool> ShowCapturedBy { get { return showCapturedBy; } }
 
         private readonly ICommand changeShowCaptured;
+        public ICommand ChangeShowCaptured { get { return changeShowCaptured; } }
 
         public SettingsViewModel()
         {
@@ -62,6 +49,4 @@ namespace ReversiGUI
             }
         }
     }
-
-
 }

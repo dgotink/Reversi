@@ -5,8 +5,8 @@
         Title="MainWindow" Height="600" Width="600">
 
     <DockPanel>
-        <x:Code HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <gui:SettingsView/>
+        <gui:BoardView x:Name="board" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <gui:SettingsView x:Name="settings"/>
     </DockPanel>
        
 

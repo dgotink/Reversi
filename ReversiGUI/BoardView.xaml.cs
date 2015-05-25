@@ -35,17 +35,15 @@ namespace ReversiGUI
             CreateNewGame();
         }
 
-        public BoardView(SettingsViewModel pSettings)
-        {
-            InitializeComponent();
-            settings = pSettings;
-            CreateNewGame();
-        }
-
         private void CreateNewGame(object sender = null, RoutedEventArgs e = null)
         {
-           vm = new GameViewModel(settings);
-           DataContext = vm;
+            CreateGameWithSettings();
+        }
+
+        public void CreateGameWithSettings()
+        {
+            vm = new GameViewModel(settings);
+            DataContext = vm;
         }
 
         private void ShowCapturedBy(object sender, MouseEventArgs e)

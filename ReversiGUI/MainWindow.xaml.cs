@@ -20,16 +20,11 @@ namespace ReversiGUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private SettingsView settings;
-        private BoardView board;
-
         public MainWindow()
         {
             InitializeComponent();
-            //DataContext = new GameSettingsViewModel();
-            settings = new SettingsView();
-            board = new BoardView(settings.Settings);
-            //board.Settings = settings.Settings;
+            board.Settings = settings.Settings;
+            board.CreateGameWithSettings();
         }
     }
 }
