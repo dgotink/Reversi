@@ -13,6 +13,9 @@ namespace ReversiGUI
         private readonly ICell<bool> showCapturedBy = Cell.Create<bool>(true);
         public ICell<bool> ShowCapturedBy { get { return showCapturedBy; } }
 
+        private readonly ICell<bool> aiPlays = Cell.Create<bool>(true);
+        public ICell<bool> AIPlays { get { return aiPlays; } }
+
         private readonly ICommand changeShowCaptured;
         public ICommand ChangeShowCaptured { get { return changeShowCaptured; } }
 

@@ -32,16 +32,20 @@ namespace ReversiGUI
 
         public ICommand StoneCommand { get { return stoneCommand; } }
 
+        private readonly BoardViewModel board;
+
         //***************
-        public SquareViewModel(ISquare pSquare)
+        public SquareViewModel(ISquare pSquare, BoardViewModel pBoard)
         {
             square = pSquare;
             stoneCommand = new PlaceStoneCommand(this);
+            board = pBoard;
         }
 
         public void PlaceStone()
         {
             square.PlaceStone();
+            board.MakeAIMove();
         }
 
         public IEnumerable<Vector2D> CapturedBy()
@@ -84,14 +88,14 @@ namespace ReversiGUI
         private readonly IList<SquareViewModel> columns;
         public IList<SquareViewModel> Columns { get { return columns; } }
 
-        public RowViewModel(ISequence<ISquare> pColumns)
+        public RowViewModel(ISequence<ISquare> pColumns, BoardViewModel pBoard)
         {
             //initialize list
             columns = new List<SquareViewModel>();
             //fill list
             foreach (var pColumn in pColumns.ToEnumerable())
             {
-                columns.Add(new SquareViewModel(pColumn));
+                columns.Add(new SquareViewModel(pColumn, pBoard));
             }
         }
 
@@ -105,15 +109,18 @@ namespace ReversiGUI
         private readonly IList<RowViewModel> rows;
         public IList<RowViewModel> Rows { get { return rows; } }
 
-        public BoardViewModel(IGrid<ISquare> pBoard)
+        private AIGameCombo ai;
+
+        public BoardViewModel(IGrid<ISquare> pBoard, AIGameCombo pAI)
         {
             //initialize list
             rows = new List<RowViewModel>();
             //fill list
             foreach (var row in pBoard.Columns())
             {
-                rows.Add(new RowViewModel(row));
+                rows.Add(new RowViewModel(row, this));
             }
+            ai = pAI;
         }
 
         public SquareViewModel getSquare(Vector2D position){
@@ -142,6 +149,16 @@ namespace ReversiGUI
                 {
                     column.IsCapturedBy.Value = false;
                 }
+            }
+        }
+
+        public void MakeAIMove()
+        {
+            if (ai.Settings.AIPlays.Value && ai.CurrentGame.CurrentPlayer.Value.Equals(Player.TWO))
+            {
+                var move = ai.AI.FindBestMove(ai.CurrentGame);
+                var square = getSquare(new Vector2D(move.X, move.Y));
+                square.PlaceStone();
             }
         }
         

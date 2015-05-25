@@ -10,33 +10,42 @@ using System.Windows.Input;
 
 namespace ReversiGUI
 {
-    class GameViewModel
+    public interface AIGameCombo
+    {
+        Game CurrentGame { get; }
+        ReversiArtificialIntelligence AI { get; }
+        SettingsViewModel Settings { get; }
+    }
+    class GameViewModel : AIGameCombo
     {
 
-        private ReversiArtificialIntelligence ai;
+        private readonly ReversiArtificialIntelligence ai;
+        public virtual ReversiArtificialIntelligence AI { get { return ai; } }
+
         private readonly BoardViewModel board;
         public BoardViewModel Board { get { return board; } }
 
         private readonly SettingsViewModel settings;
-        public SettingsViewModel Settings { get { return settings; } }
+        public virtual SettingsViewModel Settings { get { return settings; } }
 
-        private Game currentGame;
+        private readonly Game currentGame;
+        public virtual Game CurrentGame { get { return currentGame; } }
 
-        public ICell<int> StonesPlayerOne { get { return currentGame.StoneCount(Player.ONE); } }
-        public ICell<int> StonesPlayerTwo { get { return currentGame.StoneCount(Player.TWO); } }
+        public ICell<int> StonesPlayerOne { get { return CurrentGame.StoneCount(Player.ONE); } }
+        public ICell<int> StonesPlayerTwo { get { return CurrentGame.StoneCount(Player.TWO); } }
 
-        public ICell<Player> CurrentPlayer { get { return currentGame.CurrentPlayer; } }
+        public ICell<Player> CurrentPlayer { get { return CurrentGame.CurrentPlayer; } }
 
-        public ICell<bool> IsGameOver { get { return currentGame.IsGameOver; } }
+        public ICell<bool> IsGameOver { get { return CurrentGame.IsGameOver; } }
 
-        public ICell<Player> PlayerWithMostStones { get { return currentGame.PlayerWithMostStones; } }
+        public ICell<Player> PlayerWithMostStones { get { return CurrentGame.PlayerWithMostStones; } }
 
         public GameViewModel(SettingsViewModel settings)
         {
             currentGame = Game.CreateNew();
-            board = new BoardViewModel(currentGame.Board);
             this.settings = settings;
-           // ai = new ReversiArtificialIntelligence();
+            ai = ReversiArtificialIntelligence.CreateRandom();
+            board = new BoardViewModel(CurrentGame.Board, this);
         }
 
         public void SetCapturedBy(Vector2D position)
