@@ -1,0 +1,7 @@
+D:\Projecten\reversi\Reversi\ReversiLibTests\bin\Debug\ReversiLibTests.dll
+D:\Projecten\reversi\Reversi\ReversiLibTests\bin\Debug\ReversiLibTests.pdb
+D:\Projecten\reversi\Reversi\ReversiLibTests\bin\Debug\ReversiLib.dll
+D:\Projecten\reversi\Reversi\ReversiLibTests\bin\Debug\ReversiLib.pdb
+D:\Projecten\reversi\Reversi\ReversiLibTests\obj\Debug\ReversiLibTests.csprojResolveAssemblyReference.cache
+D:\Projecten\reversi\Reversi\ReversiLibTests\obj\Debug\ReversiLibTests.dll
+D:\Projecten\reversi\Reversi\ReversiLibTests\obj\Debug\ReversiLibTests.pdb
