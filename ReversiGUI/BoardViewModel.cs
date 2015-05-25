@@ -32,10 +32,13 @@ namespace ReversiGUI
 
         public ICommand StoneCommand { get { return stoneCommand; } }
 
-        private readonly BoardViewModel board;
+        private readonly SquareToBoard board;
+
+        private readonly ICell<bool> wasLastMove = Cell.Create<bool>(false);
+        public ICell<bool> WasLastMove { get { return wasLastMove; } }
 
         //***************
-        public SquareViewModel(ISquare pSquare, BoardViewModel pBoard)
+        public SquareViewModel(ISquare pSquare, SquareToBoard pBoard)
         {
             square = pSquare;
             stoneCommand = new PlaceStoneCommand(this);
@@ -45,6 +48,8 @@ namespace ReversiGUI
         public void PlaceStone()
         {
             square.PlaceStone();
+            board.RemoveWasLastMove();
+            wasLastMove.Value = true;
             board.MakeAIMove();
         }
 
@@ -104,7 +109,14 @@ namespace ReversiGUI
         }
     }
     //**************************************************************************
-    public class BoardViewModel
+
+    public interface SquareToBoard
+    {
+        void MakeAIMove();
+        void RemoveWasLastMove();
+    }
+
+    public class BoardViewModel : SquareToBoard
     {
         private readonly IList<RowViewModel> rows;
         public IList<RowViewModel> Rows { get { return rows; } }
@@ -152,7 +164,18 @@ namespace ReversiGUI
             }
         }
 
-        public void MakeAIMove()
+        public void RemoveWasLastMove()
+        {
+            foreach (RowViewModel row in Rows)
+            {
+                foreach (SquareViewModel column in row.Columns)
+                {
+                    column.WasLastMove.Value = false;
+                }
+            }
+        }
+
+        public virtual void MakeAIMove()
         {
             if (ai.Settings.AIPlays.Value && ai.CurrentGame.CurrentPlayer.Value.Equals(Player.TWO))
             {

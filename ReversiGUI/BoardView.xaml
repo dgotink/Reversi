@@ -72,6 +72,9 @@
                                                                     <Setter Property="BorderBrush" Value="Blue"/>
                                                                     <Setter Property="Background" Value="LightBlue"/>
                                                                 </Trigger>
+                                                                <DataTrigger Binding="{Binding WasLastMove.Value}" Value="True">
+                                                                    <Setter Property="BorderBrush" Value="Red"/>
+                                                                </DataTrigger>
                                                             </Style.Triggers>
                                                         </Style>
                                                     </Border.Style>
