@@ -36,7 +36,7 @@ namespace ReversiGUI
             currentGame = Game.CreateNew();
             board = new BoardViewModel(currentGame.Board);
             this.settings = settings;
-            ai = new ReversiArtificialIntelligence();
+           // ai = new ReversiArtificialIntelligence();
         }
 
         public void SetCapturedBy(Vector2D position)
