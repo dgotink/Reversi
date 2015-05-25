@@ -18,6 +18,9 @@ $RECYCLE.BIN/
 **/bin/
 **/obj/
 
+# Visual studio files
+*.suo
+
 # Windows shortcuts
 *.lnk
 
