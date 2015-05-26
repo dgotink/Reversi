@@ -39,9 +39,29 @@
             </Border>
         </Grid>
 
-        <!-- *****************************************************************************************-->
-        <Button DockPanel.Dock="Top" Margin="0,5" Height="50" HorizontalAlignment="Stretch" Click="CreateNewGame">Create new Game</Button>
+        <!-- *****************************TIMER AND CREATE BUTTON********************************************-->
+        
+        <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
+            <Button Margin="0,5" Height="50" HorizontalAlignment="Stretch" Click="CreateNewGame">Create new Game</Button>
+            <Grid Margin="0,0,0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" BorderThickness="1" BorderBrush="Black">
+                    <TextBlock Text="Time played:" Background="LightGray" FontSize="14" TextAlignment="Center" Padding="4"/>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="Black">
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding TimePlayed.Value}" TextAlignment="Right" FontSize="16" Padding="10,2"/>
+                </Border> 
+            </Grid>
+        </StackPanel>
+        
         <!-- **********************************BOARD VIEW*********************************************-->
+        
         <ItemsControl ItemsSource="{Binding Board.Rows}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>

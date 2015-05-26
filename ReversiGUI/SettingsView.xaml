@@ -7,10 +7,11 @@
              d:DesignHeight="300" d:DesignWidth="300">
     
     <DockPanel>
-        <Button x:Name="isCapturedBool" DockPanel.Dock="Top" Margin="0,5" Height="50" Width="150" Command="{Binding ChangeShowCaptured}">
+        <StackPanel DockPanel.Dock="Top">
+            <Button x:Name="isCapturedBool" Margin="0,5" Height="50" Width="150" Command="{Binding ChangeShowCaptured}">
             <Button.Template>
                 <ControlTemplate>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="50">
+                    <Border BorderThickness="1" BorderBrush="Black">
                         <TextBlock TextAlignment="Center" TextWrapping="Wrap" Padding="12">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
@@ -28,11 +29,34 @@
                             </TextBlock.Style>
                         </TextBlock>
                     </Border>
-                   
-                   
                 </ControlTemplate>
-                
             </Button.Template>
         </Button>
+        <Button x:Name="aiPlays" Margin="0,5" Height="50" Width="150" Command="{Binding ChangeAIPlays}">
+            <Button.Template>
+                <ControlTemplate>
+                    <Border BorderThickness="1" BorderBrush="Black">
+                        <TextBlock TextAlignment="Center" TextWrapping="Wrap" Padding="12">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding AIPlays.Value}" Value="true">
+                                            <Setter Property="Background" Value="#8AD49D"/>
+                                            <Setter Property="TextBlock.Text" Value="vs. AI"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding AIPlays.Value}" Value="false">
+                                            <Setter Property="Background" Value="#D48A8A"/>
+                                            <Setter Property="TextBlock.Text" Value="vs. human"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+      </StackPanel>
+        
     </DockPanel>   
 </UserControl>

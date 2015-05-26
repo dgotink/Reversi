@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace ReversiGUI
 {
@@ -40,12 +41,32 @@ namespace ReversiGUI
 
         public ICell<Player> PlayerWithMostStones { get { return CurrentGame.PlayerWithMostStones; } }
 
+        private readonly ICell<int> timePlayed;
+        public ICell<int> TimePlayed { get { return timePlayed; } }
+
+        private readonly DispatcherTimer timer;
+
         public GameViewModel(SettingsViewModel settings)
         {
             currentGame = Game.CreateNew();
             this.settings = settings;
             ai = ReversiArtificialIntelligence.CreateRandom();
             board = new BoardViewModel(CurrentGame.Board, this);
+            timePlayed = Cell.Create<int>(0);
+            timer = new DispatcherTimer();
+            InitTimer();
+        }
+
+        private void InitTimer()
+        {
+            timer.Tick += new EventHandler(TimerTick);
+            timer.Interval = new TimeSpan(0, 0, 1);
+            timer.Start();
+        }
+
+        private void TimerTick(object sender, EventArgs e)
+        {
+            timePlayed.Value++;
         }
 
         public void SetCapturedBy(Vector2D position)
