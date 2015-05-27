@@ -23,8 +23,6 @@ namespace ReversiGUI
         public MainWindow()
         {
             InitializeComponent();
-            board.Settings = settings.Settings;
-            board.CreateGameWithSettings();
         }
     }
 }
