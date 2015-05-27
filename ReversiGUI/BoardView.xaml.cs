@@ -22,6 +22,12 @@ namespace ReversiGUI
     public partial class BoardView : UserControl
     {
         GameViewModel vm;
+        private SettingsViewModel settings;
+        public SettingsViewModel Settings
+        {
+            get { return settings;}
+            set { settings = value; }
+        }
 
         public BoardView()
         {
@@ -31,7 +37,12 @@ namespace ReversiGUI
 
         private void CreateNewGame(object sender = null, RoutedEventArgs e = null)
         {
-            vm = new GameViewModel();
+            CreateGameWithSettings();
+        }
+
+        public void CreateGameWithSettings()
+        {
+            vm = new GameViewModel(settings);
             DataContext = vm;
         }
 

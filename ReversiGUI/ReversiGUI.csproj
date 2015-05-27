@@ -59,6 +59,7 @@
     </Compile>
     <Compile Include="BoardViewModel.cs" />
     <Compile Include="Converters\TextColorConverter.cs" />
+    <Compile Include="GameSettingsViewModel.cs" />
     <Compile Include="SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
