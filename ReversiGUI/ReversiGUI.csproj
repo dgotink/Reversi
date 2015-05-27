@@ -58,6 +58,7 @@
       <DependentUpon>BoardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="BoardViewModel.cs" />
+    <Compile Include="Converters\TextColorConverter.cs" />
     <Compile Include="GameSettingsViewModel.cs" />
     <Compile Include="SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -107,6 +108,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -125,6 +127,14 @@
   <ItemGroup>
     <Resource Include="resources\witReversi.png" />
     <Resource Include="resources\zwartReversi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\geelReversi.png" />
+    <Resource Include="resources\groenReversi.png" />
+    <Resource Include="resources\roodReversi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\blauwReversi.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

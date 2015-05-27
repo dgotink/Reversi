@@ -14,8 +14,8 @@ namespace ReversiGUI
         {
             if (value != null)
             {
-                if (value.Equals(Player.ONE)) return "White won!";
-                else if (value.Equals(Player.TWO)) return "Black won!";
+                if (value.Equals(Player.ONE)) return "Player 1 won!";
+                else if (value.Equals(Player.TWO)) return "Player 2 won!";
             }
             return "";
         }

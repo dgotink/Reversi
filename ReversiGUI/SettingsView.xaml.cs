@@ -26,8 +26,13 @@ namespace ReversiGUI
         public SettingsView()
         {
             InitializeComponent();
-            settings = new SettingsViewModel();
+            settings = SettingsViewModel.getInstance();
             DataContext = settings;
+        }
+
+        private void ColorChangedPopup(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Please restart the game to play with your new selected color.", "Color changed");
         }
     }
 }

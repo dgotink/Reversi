@@ -20,9 +20,8 @@ namespace ReversiGUI
 
         public GameSettingsViewModel()
         {
-            settings = new SettingsViewModel();
+            settings = SettingsViewModel.getInstance();
             game = new GameViewModel(settings);
-
         }
     }
 }

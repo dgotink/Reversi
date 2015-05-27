@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace ReversiGUI
@@ -28,6 +30,12 @@ namespace ReversiGUI
 
         private readonly SettingsViewModel settings;
         public virtual SettingsViewModel Settings { get { return settings; } }
+
+        public Color ColorPlayerOne { get { return settings.ColorPlayerOne; } }
+        public Color ColorPlayerTwo { get { return settings.ColorPlayerTwo; } }
+      
+        public SolidColorBrush ColorPlayerOneAsBrush { get { return new SolidColorBrush(settings.ColorPlayerOne); } }
+        public SolidColorBrush ColorPlayerTwoAsBrush { get { return new SolidColorBrush(settings.ColorPlayerTwo); } }
 
         private readonly Game currentGame;
         public virtual Game CurrentGame { get { return currentGame; } }

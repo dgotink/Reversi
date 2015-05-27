@@ -120,7 +120,7 @@ namespace ReversiGUI
     {
         private readonly IList<RowViewModel> rows;
         public IList<RowViewModel> Rows { get { return rows; } }
-
+        
         private AIGameCombo ai;
 
         public BoardViewModel(IGrid<ISquare> pBoard, AIGameCombo pAI)
@@ -177,12 +177,18 @@ namespace ReversiGUI
 
         public virtual void MakeAIMove()
         {
-            if (ai.Settings.AIPlays.Value && ai.CurrentGame.CurrentPlayer.Value.Equals(Player.TWO))
-            {
-                var move = ai.AI.FindBestMove(ai.CurrentGame);
-                var square = getSquare(new Vector2D(move.X, move.Y));
-                square.PlaceStone();
+            if(!ai.CurrentGame.IsGameOver.Value){
+                if (ai.Settings.AIPlays.Value && ai.CurrentGame.CurrentPlayer.Value.Equals(Player.TWO))
+                {
+                     var move = ai.AI.FindBestMove(ai.CurrentGame);
+                     if (move != null)
+                      {
+                          var square = getSquare(new Vector2D(move.X, move.Y));
+                            square.PlaceStone();
+                       }
+                 }
             }
+            
         }
         
     }

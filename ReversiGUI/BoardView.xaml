@@ -11,6 +11,7 @@
         <gui:CurrentPlayerConverter x:Key="currentPlayerConverter"/>
         <gui:GameOverConverter x:Key="gameOverConverter"/>
         <gui:PlayerWithMostStonesConverter x:Key="playerWithMostStonesConverter"/>
+        <gui:TextColorConverter x:Key="textColorConverter"/>
     </UserControl.Resources>
     
     <DockPanel>
@@ -26,16 +27,16 @@
                 <ColumnDefinition Width="80"/>
             </Grid.ColumnDefinitions>
             <Border Grid.Row="0" Grid.Column="0" BorderThickness="1" BorderBrush="Black">
-                <TextBlock HorizontalAlignment="Left" Text="{Binding StonesPlayerOne.Value}" Width="80" Height="50" TextAlignment="Center" FontSize="24" VerticalAlignment="Center"/>
+                <TextBlock HorizontalAlignment="Left" Text="{Binding StonesPlayerOne.Value}" Width="80" Height="50" TextAlignment="Center" FontSize="24" VerticalAlignment="Center" Background="{Binding ColorPlayerOneAsBrush}" Foreground="{Binding ColorPlayerOne, Converter={StaticResource textColorConverter}}" Padding="7"/>
             </Border>
             <Border Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="Black">
-                <TextBlock HorizontalAlignment="Stretch" Text="{Binding CurrentPlayer.Value, Converter={StaticResource currentPlayerConverter}, ConverterParameter=true}" Height="50" TextAlignment="Center" FontSize="24" VerticalAlignment="Center" Background="LightGray"/>
+                <TextBlock HorizontalAlignment="Stretch" Text="{Binding CurrentPlayer.Value, Converter={StaticResource currentPlayerConverter}, ConverterParameter=true}" Height="50" TextAlignment="Center" FontSize="20" VerticalAlignment="Center" Background="LightGray" Padding="7"/>
             </Border>
             <Border Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="Black" Visibility="{Binding IsGameOver.Value, Converter={StaticResource gameOverConverter}}">
-                <TextBlock HorizontalAlignment="Stretch" Text="{Binding PlayerWithMostStones.Value, Converter={StaticResource playerWithMostStonesConverter} }" Height="50" TextAlignment="Center" FontSize="24" VerticalAlignment="Center" Background="LightGray"/>
+                <TextBlock HorizontalAlignment="Stretch" Text="{Binding PlayerWithMostStones.Value, Converter={StaticResource playerWithMostStonesConverter} }" Height="50" TextAlignment="Center" FontSize="24" VerticalAlignment="Center" Background="LightGray" Padding="7"/>
             </Border>
             <Border Grid.Row="0" Grid.Column="2" BorderThickness="1" BorderBrush="Black">
-                <TextBlock HorizontalAlignment="Right" Text="{Binding StonesPlayerTwo.Value}" Width="80" Height="50" Background="Black" Foreground="White" TextAlignment="Center" FontSize="24" VerticalAlignment="Center"/>
+                <TextBlock HorizontalAlignment="Right" Text="{Binding StonesPlayerTwo.Value}" Width="80" Height="50" Foreground="{Binding ColorPlayerTwo, Converter={StaticResource textColorConverter}}" TextAlignment="Center" FontSize="24" VerticalAlignment="Center" Background="{Binding ColorPlayerTwoAsBrush}" Padding="7"/>
             </Border>
         </Grid>
 
@@ -93,7 +94,7 @@
                                                                     <Setter Property="Background" Value="LightBlue"/>
                                                                 </Trigger>
                                                                 <DataTrigger Binding="{Binding WasLastMove.Value}" Value="True">
-                                                                    <Setter Property="BorderBrush" Value="Red"/>
+                                                                    <Setter Property="BorderBrush" Value="Gold"/>
                                                                 </DataTrigger>
                                                             </Style.Triggers>
                                                         </Style>
