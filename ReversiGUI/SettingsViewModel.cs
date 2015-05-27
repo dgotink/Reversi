@@ -1,4 +1,5 @@
 ﻿using Reversi.Cells;
+using Reversi.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,9 +37,6 @@ namespace ReversiGUI
         private readonly ICommand changeShowCaptured;
         public ICommand ChangeShowCaptured { get { return changeShowCaptured; } }
 
-        private readonly ICommand changeAIPlays;
-        public ICommand ChangeAIPlays { get { return changeAIPlays; } }
-
         private Color colorPlayerOne = ColorWhite;
         public virtual Color ColorPlayerOne 
         { 
@@ -59,12 +57,25 @@ namespace ReversiGUI
         private readonly ICommand changeColorPlayerTwo;
         public ICommand ChangeColorPlayerTwo { get { return changeColorPlayerTwo; } }
 
+        private readonly ICommand changeAI;
+        public ICommand ChangeAI { get { return changeAI; } }
+
+        private ReversiArtificialIntelligence ai = null;
+        public ReversiArtificialIntelligence AI
+        {
+            get { return ai; }
+            set { ai = value; }
+        }
+
+        private readonly ICell<int> aiDifficulty = Cell.Create<int>(0); //0 = null, 1 = easy, 2 = medium, 3 = hard
+        public ICell<int> AIDifficulty { get { return aiDifficulty; } }
+
         private SettingsViewModel()
         {
             changeShowCaptured = new ChangeShowCapturedByCommand(this);
-            changeAIPlays = new ChangeAIPlaysCommand(this);
             changeColorPlayerOne = new ChangeColorPlayerOneCommand(this);
             changeColorPlayerTwo = new ChangeColorPlayerTwoCommand(this);
+            changeAI = new ChangeAICommand(this);
         }
 
         public static SettingsViewModel getInstance()
@@ -109,6 +120,17 @@ namespace ReversiGUI
             else return ColorWhite;
         }
 
+        public void ChangeAIDifficulty(ReversiArtificialIntelligence ai)
+        {
+            if (ai == null) aiPlays.Value = false;
+            else
+            {
+                this.ai = ai;
+                aiPlays.Value = true;
+            }
+
+        }
+
         private class ChangeShowCapturedByCommand : ICommand {
 
             private readonly SettingsViewModel model;
@@ -128,29 +150,6 @@ namespace ReversiGUI
             public void Execute(object parameter)
             {
                 model.ChangeShowCapturedBy();
-            }
-        }
-
-        private class ChangeAIPlaysCommand : ICommand
-        {
-
-            private readonly SettingsViewModel model;
-
-            public ChangeAIPlaysCommand(SettingsViewModel pModel)
-            {
-                model = pModel;
-            }
-
-            public bool CanExecute(object parameter)
-            {
-                return true;
-            }
-
-            public event EventHandler CanExecuteChanged;
-
-            public void Execute(object parameter)
-            {
-                model.ChangeAIPlayBool();
             }
         }
 
@@ -199,6 +198,51 @@ namespace ReversiGUI
             {
                 string color = (string)parameter;
                 model.ChangePlayerColor(2, color);
+            }
+        }
+        
+        private class ChangeAICommand : ICommand
+        {
+            private readonly SettingsViewModel model;
+
+            public ChangeAICommand(SettingsViewModel pModel)
+            {
+                model = pModel;
+            }
+
+            public bool CanExecute(object parameter)
+            {
+                return true;
+            }
+
+            public event EventHandler CanExecuteChanged;
+
+            public void Execute(object parameter)
+            {
+                if (parameter != null)
+                {
+                    string param = (string) parameter;
+                    if (param.Equals("none"))
+                    {
+                        model.ChangeAIDifficulty(null);
+                        model.AIDifficulty.Value = 0;
+                    }
+                    else if (param.Equals("easy"))
+                    {
+                        model.ChangeAIDifficulty(ReversiArtificialIntelligence.CreateRandom());
+                        model.AIDifficulty.Value = 1;
+                    }
+                    else if (param.Equals("medium"))
+                    {
+                        model.ChangeAIDifficulty(ReversiArtificialIntelligence.CreateDirect(new StoneCountHeuristic(), 1));
+                        model.AIDifficulty.Value = 2;
+                    }
+                    else if (param.Equals("hard"))
+                    {
+                        model.ChangeAIDifficulty(ReversiArtificialIntelligence.CreateDirect(new WeightedStoneCountHeuristic(), 2));
+                        model.AIDifficulty.Value = 3;
+                    }
+                }
             }
         }
     }   

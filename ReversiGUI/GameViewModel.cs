@@ -17,13 +17,13 @@ namespace ReversiGUI
     {
         Game CurrentGame { get; }
         ReversiArtificialIntelligence AI { get; }
-        SettingsViewModel Settings { get; }
+        bool AIPlays { get; }
     }
     class GameViewModel : AIGameCombo
     {
 
-        private readonly ReversiArtificialIntelligence ai;
-        public virtual ReversiArtificialIntelligence AI { get { return ai; } }
+        public virtual ReversiArtificialIntelligence AI { get { return settings.AI; } }
+        public virtual bool AIPlays { get { return settings.AIPlays.Value; } }
 
         private readonly BoardViewModel board;
         public BoardViewModel Board { get { return board; } }
@@ -54,11 +54,13 @@ namespace ReversiGUI
 
         private readonly DispatcherTimer timer;
 
+       /* private readonly ICommand aiCommand;
+        public ICommand AICommand { get { return aiCommand; } }*/
+
         public GameViewModel(SettingsViewModel settings)
         {
             currentGame = Game.CreateNew();
             this.settings = settings;
-            ai = ReversiArtificialIntelligence.CreateMinimax(new WeightedStoneCountHeuristic(), 2);
             board = new BoardViewModel(CurrentGame.Board, this);
             timePlayed = Cell.Create<int>(0);
             timer = new DispatcherTimer();

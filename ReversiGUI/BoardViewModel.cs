@@ -178,7 +178,7 @@ namespace ReversiGUI
         public virtual void MakeAIMove()
         {
             if(!ai.CurrentGame.IsGameOver.Value){
-                if (ai.Settings.AIPlays.Value && ai.CurrentGame.CurrentPlayer.Value.Equals(Player.TWO))
+                if (ai.AIPlays && ai.CurrentGame.CurrentPlayer.Value.Equals(Player.TWO))
                 {
                      var move = ai.AI.FindBestMove(ai.CurrentGame);
                      if (move != null)

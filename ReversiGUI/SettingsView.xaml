@@ -33,30 +33,110 @@
                 </Button.Template>
             </Button>
 
-            <Button x:Name="aiPlays" Margin="0,5" Height="50" Width="150" Command="{Binding ChangeAIPlays}">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border BorderThickness="1" BorderBrush="Black">
-                            <TextBlock TextAlignment="Center" TextWrapping="Wrap" Padding="12">
-                                <TextBlock.Style>
-                                    <Style TargetType="{x:Type TextBlock}">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding AIPlays.Value}" Value="true">
-                                                <Setter Property="Background" Value="#8AD49D"/>
-                                                <Setter Property="TextBlock.Text" Value="vs. AI"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding AIPlays.Value}" Value="false">
-                                                <Setter Property="Background" Value="#D48A8A"/>
-                                                <Setter Property="TextBlock.Text" Value="vs. human"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+            <Grid Width="150" Height="200">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" BorderThickness="1px" BorderBrush="Black">
+                    <TextBlock TextAlignment="Center" TextWrapping="Wrap" Padding="12" FontSize="14" Background="LightGray">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding AIPlays.Value}" Value="true">
+                                        <Setter Property="Text" Value="vs. AI"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding AIPlays.Value}" Value="false">
+                                        <Setter Property="Text" Value="vs. human"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock> 
+                </Border>
+                <Button Grid.Row="1" Grid.Column="0" Command="{Binding ChangeAI}" CommandParameter="none">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border BorderThickness="1px" BorderBrush="Black">
+                                <TextBlock Text="none" TextAlignment="Center" TextWrapping="Wrap" Padding="7">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding AIDifficulty.Value}" Value="0">
+                                                    <Setter Property="Background" Value="LightGray"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Grid.Row="2" Grid.Column="0" Command="{Binding ChangeAI}" CommandParameter="easy">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border BorderThickness="1px" BorderBrush="Black">
+                                <TextBlock Text="easy" TextAlignment="Center" TextWrapping="Wrap" Padding="7">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding AIDifficulty.Value}" Value="1">
+                                                    <Setter Property="Background" Value="LightGray"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Grid.Row="3" Grid.Column="0" Command="{Binding ChangeAI}" CommandParameter="medium">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border BorderThickness="1px" BorderBrush="Black">
+                                <TextBlock Text="medium" TextAlignment="Center" TextWrapping="Wrap" Padding="7">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding AIDifficulty.Value}" Value="2">
+                                                    <Setter Property="Background" Value="LightGray"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Grid.Row="4" Grid.Column="0" Command="{Binding ChangeAI}" CommandParameter="hard">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border BorderThickness="1px" BorderBrush="Black">
+                                <TextBlock Text="hard" TextAlignment="Center" TextWrapping="Wrap" Padding="7">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding AIDifficulty.Value}" Value="3">
+                                                    <Setter Property="Background" Value="LightGray"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
 
             <Grid Width="150" Height="100" Margin="0,5">
                 <Grid.RowDefinitions>
