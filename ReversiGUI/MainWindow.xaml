@@ -2,11 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:gui="clr-namespace:ReversiGUI"
-        Title="MainWindow" Height="600" Width="600">
+        Title="Reversi" MinHeight="620" MaxHeight="620" MinWidth="620" MaxWidth="620">
 
-    <DockPanel>
+    <DockPanel Margin="10">
         <gui:BoardView x:Name="board" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <gui:SettingsView x:Name="settings"/>
+        <gui:SettingsView x:Name="settings" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </DockPanel>
        
 

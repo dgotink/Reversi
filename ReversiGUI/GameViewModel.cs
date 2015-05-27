@@ -22,20 +22,19 @@ namespace ReversiGUI
     class GameViewModel : AIGameCombo
     {
 
-        public virtual ReversiArtificialIntelligence AI { get { return settings.AI; } }
-        public virtual bool AIPlays { get { return settings.AIPlays.Value; } }
+        public virtual ReversiArtificialIntelligence AI { get { return Settings.AI; } }
+        public virtual bool AIPlays { get { return Settings.AIPlays.Value; } }
 
         private readonly BoardViewModel board;
         public BoardViewModel Board { get { return board; } }
 
-        private readonly SettingsViewModel settings;
-        public virtual SettingsViewModel Settings { get { return settings; } }
+        public virtual SettingsViewModel Settings { get { return SettingsViewModel.getInstance(); } }
 
-        public Color ColorPlayerOne { get { return settings.ColorPlayerOne; } }
-        public Color ColorPlayerTwo { get { return settings.ColorPlayerTwo; } }
+        public Color ColorPlayerOne { get { return Settings.ColorPlayerOne; } }
+        public Color ColorPlayerTwo { get { return Settings.ColorPlayerTwo; } }
       
-        public SolidColorBrush ColorPlayerOneAsBrush { get { return new SolidColorBrush(settings.ColorPlayerOne); } }
-        public SolidColorBrush ColorPlayerTwoAsBrush { get { return new SolidColorBrush(settings.ColorPlayerTwo); } }
+        public SolidColorBrush ColorPlayerOneAsBrush { get { return new SolidColorBrush(Settings.ColorPlayerOne); } }
+        public SolidColorBrush ColorPlayerTwoAsBrush { get { return new SolidColorBrush(Settings.ColorPlayerTwo); } }
 
         private readonly Game currentGame;
         public virtual Game CurrentGame { get { return currentGame; } }
@@ -54,13 +53,9 @@ namespace ReversiGUI
 
         private readonly DispatcherTimer timer;
 
-       /* private readonly ICommand aiCommand;
-        public ICommand AICommand { get { return aiCommand; } }*/
-
-        public GameViewModel(SettingsViewModel settings)
+        public GameViewModel()
         {
             currentGame = Game.CreateNew();
-            this.settings = settings;
             board = new BoardViewModel(CurrentGame.Board, this);
             timePlayed = Cell.Create<int>(0);
             timer = new DispatcherTimer();
@@ -82,12 +77,12 @@ namespace ReversiGUI
 
         public void SetCapturedBy(Vector2D position)
         {
-            if(settings.ShowCapturedBy.Value) board.SetCapturedBy(position);
+            if(Settings.ShowCapturedBy.Value) board.SetCapturedBy(position);
         }
 
         public void RemoveCapturedBy()
         {
-            if (settings.ShowCapturedBy.Value) board.RemoveCapturedBy();
+            if (Settings.ShowCapturedBy.Value) board.RemoveCapturedBy();
         }
     }
 }
