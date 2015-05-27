@@ -58,7 +58,7 @@ namespace ReversiGUI
         {
             currentGame = Game.CreateNew();
             this.settings = settings;
-            ai = ReversiArtificialIntelligence.CreateRandom();
+            ai = ReversiArtificialIntelligence.CreateMinimax(new WeightedStoneCountHeuristic(), 2);
             board = new BoardViewModel(CurrentGame.Board, this);
             timePlayed = Cell.Create<int>(0);
             timer = new DispatcherTimer();
@@ -74,6 +74,7 @@ namespace ReversiGUI
 
         private void TimerTick(object sender, EventArgs e)
         {
+            if (currentGame.IsGameOver.Value) timer.Stop();
             timePlayed.Value++;
         }
 

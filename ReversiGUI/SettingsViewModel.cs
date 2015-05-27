@@ -39,14 +39,14 @@ namespace ReversiGUI
         private readonly ICommand changeAIPlays;
         public ICommand ChangeAIPlays { get { return changeAIPlays; } }
 
-        private Color colorPlayerOne = ColorYellow;
+        private Color colorPlayerOne = ColorWhite;
         public virtual Color ColorPlayerOne 
         { 
             get { return colorPlayerOne; }
             set { colorPlayerOne = value; }
         }
 
-        private Color colorPlayerTwo = ColorGreen;
+        private Color colorPlayerTwo = ColorBlack;
         public virtual Color ColorPlayerTwo
         {
             get { return colorPlayerTwo; }

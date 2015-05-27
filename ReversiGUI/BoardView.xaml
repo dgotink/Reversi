@@ -94,7 +94,7 @@
                                                                     <Setter Property="Background" Value="LightBlue"/>
                                                                 </Trigger>
                                                                 <DataTrigger Binding="{Binding WasLastMove.Value}" Value="True">
-                                                                    <Setter Property="BorderBrush" Value="Gold"/>
+                                                                    <Setter Property="Background" Value="cyan"/>
                                                                 </DataTrigger>
                                                             </Style.Triggers>
                                                         </Style>
